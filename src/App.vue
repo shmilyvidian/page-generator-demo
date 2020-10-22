@@ -5,18 +5,14 @@
         <el-col :span="12">
           <div class="page-generator_left">
             <div class="page-generator_upload">
-              <el-upload
-                class="upload-demo"
-                action="https://jsonplaceholder.typicode.com/posts/"
-                :on-preview="handlePreview"
-                :on-remove="handleRemove"
-                :on-error="handleError"
-                :file-list="fileList"
-                list-type="picture"
-              >
-                <el-button size="big" type="primary">点击上传</el-button>
-              </el-upload>
+              <el-button v-if="status === 0" size="big" type="primary" @click="status = 1">点击上传</el-button>
+              <div :class="status === 1 ? 'page-generator_upload-picture' : ''" v-else>
+                <img :src="require('./assets/test.png')" width="540" height="360"/>
+                <span class="page-generator_upload-loadingText">解析中...<i class="el-icon-loading"></i></span>
+                <i class="el-icon-close" @click="status = 0" v-if="status !== 0"></i>
+              </div>
             </div>
+            <img :src="require('./assets/programmer.gif')" class="page-generator_programmer" width="300" height="156" alt="">
             <el-dialog
               title="设计稿预览"
               :visible.sync="picVisible"
@@ -41,7 +37,7 @@
                 theme="chrome"
                 width="100%"
               />
-              <div class="page-generator_code-preview" v-if="status === 2">
+              <div class="page-generator_code-preview" v-if="status === 3">
                 <el-button @click="dialogVisible = true">预览</el-button>
               </div>
             </div>
@@ -134,7 +130,7 @@ export default {
     },
     changStatus(type) {
       this.status = type;
-      if (type === 2) {
+      if (type === 3) {
         this.content = content;
       }
     },
@@ -152,7 +148,7 @@ export default {
           url: require("./assets/test.png"),
         },
       ];
-      this.status = 1;
+      this.status = 2;
     },
     editorInit: function (editor) {
       editor.getSession().setUseWorker(false);

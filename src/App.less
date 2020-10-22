@@ -12,17 +12,60 @@ body {
   border-radius: 4px;
 }
 .page-generator_left{
+    position: relative;
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-direction: column;
     height: calc(100vh - 32px);
-    border-right: 1px solid #ccc;
-    box-sizing: border-box;
+    background: #E9F5FF;
 }
 
 .page-generator_upload{
-    height: 120px;
-    width: 320px;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 540px;
+    height: 360px;
+    background: #FFFFFF;
+    box-shadow: 0 2px 14px 0 rgba(94,154,202,0.20);
+    border-radius: 8px;
+    .el-button{
+      width: 170px;
+      height: 48px;
+      background: #308DFF;
+      box-shadow: 0 2px 30px 0 rgba(28,99,243,0.28);
+      border-radius: 30px;
+    }
+    .el-icon-close{
+      position: absolute;
+      width: 24px;
+      height: 24px;
+      top: 20px;
+      right: 20px;
+      color: #FF7635;
+    }
+    &-loadingText{
+      position: absolute;
+      top:50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-family: PingFangSC-Medium;
+      font-size: 16px;
+      color: #FFFFFF;
+      letter-spacing: 1.78px;
+    }
+    &-picture{
+      background: #000;
+      img{
+        opacity:0.6; filter: alpha(opacity=60);
+      }
+    }
+}
+.page-generator_programmer{
+  position: absolute;
+  bottom: 0;
 }
 .page-generator_code{
     position: relative;

@@ -169,7 +169,7 @@ export default {
       if(val === 1){
         this.$refs.vueTerinal.handleRun("defaultTask")
         setTimeout(()=>{
-          this.$emit('changStatus', 2)
+          this.$emit('changStatus', 3)
         }, 5000)
       }
     }
