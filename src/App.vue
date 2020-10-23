@@ -5,11 +5,18 @@
         <el-col :span="12">
           <div class="page-generator_left">
             <div class="page-generator_upload">
-              <el-button v-if="status === 0" size="big" type="primary" @click="status = 1">点击上传</el-button>
-              <div :class="status === 1 ? 'page-generator_upload-picture' : ''" v-else>
+              <el-upload
+                v-if="status === 0"
+                class="upload-demo"
+                action="https://jsonplaceholder.typicode.com/posts/"
+                :on-progress="handleProgress"
+              >
+                <el-button size="big" type="primary">点击上传</el-button>
+              </el-upload>
+              <div v-else :class="status === 1 ? 'page-generator_upload-picture' : ''">
                 <img :src="require('./assets/test.png')" width="540" height="360"/>
                 <span class="page-generator_upload-loadingText">解析中...<i class="el-icon-loading"></i></span>
-                <i class="el-icon-close" @click="status = 0" v-if="status !== 0"></i>
+                <i class="el-icon-close" @click="handlePicViewClose" v-if="status !== 0"></i>
               </div>
             </div>
             <img :src="require('./assets/programmer.gif')" class="page-generator_programmer" width="300" height="156" alt="">
@@ -37,7 +44,7 @@
                 theme="chrome"
                 width="100%"
               />
-              <div class="page-generator_code-preview" v-if="status === 3">
+              <div class="page-generator_code-preview" v-if="status === 3 || isPreviewCode">
                 <el-button @click="dialogVisible = true">预览</el-button>
               </div>
             </div>
@@ -113,6 +120,7 @@ export default {
   },
   data() {
     return {
+      isPreviewCode: false,
       dialogVisible: false,
       picVisible: false,
       status: 0,
@@ -122,6 +130,13 @@ export default {
     };
   },
   methods: {
+    handlePicViewClose(){
+      this.status = 0
+      this.isPreviewCode = true
+    },
+    handleProgress(){
+      this.status = 1
+    },
     handleClose(){
       this.dialogVisible = false
     },
